@@ -88,7 +88,6 @@ static CGFloat gILResponseDelay = 0;
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:gILCannedHeaders];
     dict[@"Content-Type"] = contentType;
     [self setCannedHeaders:[dict copy]];
-    [dict release];
 }
 
 + (void)setCannedStatusCode:(NSInteger)statusCode {
