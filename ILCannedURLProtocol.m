@@ -47,8 +47,7 @@ static CGFloat gILResponseDelay = 0;
 @implementation ILCannedURLProtocol
 
 + (void)setStartLoadingBlock:(void(^)(NSURLRequest *request))block {
-    Block_release(startLoadingBlock);
-    startLoadingBlock = Block_copy(block);
+    startLoadingBlock = block;
 }
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request {
@@ -77,17 +76,11 @@ static CGFloat gILResponseDelay = 0;
 }
 
 + (void)setCannedResponseData:(NSData*)data {
-	if(data != gILCannedResponseData) {
-		[gILCannedResponseData release];
-		gILCannedResponseData = [data retain];
-	}
+    gILCannedResponseData = data;
 }
 
 + (void)setCannedHeaders:(NSDictionary*)headers {
-	if(headers != gILCannedHeaders) {
-		[gILCannedHeaders release];
-		gILCannedHeaders = [headers retain];
-	}
+    gILCannedHeaders = headers;
 }
 
 + (void)setCannedStatusCode:(NSInteger)statusCode {
@@ -95,10 +88,7 @@ static CGFloat gILResponseDelay = 0;
 }
 
 + (void)setCannedError:(NSError*)error {
-	if(error != gILCannedError) {
-		[gILCannedError release];
-		gILCannedError = [error retain];
-	}
+    gILCannedError = error;
 }
 
 - (NSCachedURLResponse *)cachedResponse {
@@ -106,24 +96,15 @@ static CGFloat gILResponseDelay = 0;
 }
 
 + (void)setSupportedMethods:(NSArray*)methods {
-	if(methods != gILSupportedMethods) {
-		[gILSupportedMethods release];
-		gILSupportedMethods = [methods retain];
-	}
+    gILSupportedMethods = methods;
 }
 
 + (void)setSupportedSchemes:(NSArray*)schemes {
-	if(schemes != gILSupportedSchemes) {
-		[gILSupportedSchemes release];
-		gILSupportedSchemes = [schemes retain];
-	}
+    gILSupportedSchemes = schemes;
 }
 
 + (void)setSupportedBaseURL:(NSURL*)baseURL {
-	if(baseURL != gILSupportedBaseURL) {
-		[gILSupportedBaseURL release];
-		gILSupportedBaseURL = [baseURL retain];
-	}
+    gILSupportedBaseURL = baseURL;
 }
 
 
@@ -191,8 +172,6 @@ static CGFloat gILResponseDelay = 0;
 		[client URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed];
 		[client URLProtocol:self didLoadData:responseData];
 		[client URLProtocolDidFinishLoading:self];
-		
-		[response release];
 	}
 }
 
