@@ -83,12 +83,27 @@ static CGFloat gILResponseDelay = 0;
     gILCannedHeaders = headers;
 }
 
++ (void)setCannedContentType:(NSString *)contentType
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:gILCannedHeaders];
+    dict[@"Content-Type"] = contentType;
+    [self setCannedHeaders:[dict copy]];
+    [dict release];
+}
+
 + (void)setCannedStatusCode:(NSInteger)statusCode {
 	gILCannedStatusCode = statusCode;
 }
 
 + (void)setCannedError:(NSError*)error {
     gILCannedError = error;
+}
+
++ (void)setCannedResponseJSON:(NSString *)JSONBody
+{
+    [self setCannedContentType:@"application/json"];
+    NSData *bodyData = [JSONBody dataUsingEncoding:NSUTF8StringEncoding];
+    [self setCannedResponseData:bodyData];
 }
 
 - (NSCachedURLResponse *)cachedResponse {

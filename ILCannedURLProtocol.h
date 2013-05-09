@@ -42,8 +42,10 @@
 
 + (void)setCannedResponseData:(NSData*)data;
 + (void)setCannedHeaders:(NSDictionary*)headers;
++ (void)setCannedContentType:(NSString*)contentType;
 + (void)setCannedStatusCode:(NSInteger)statusCode;
 + (void)setCannedError:(NSError*)error;
++ (void)setCannedResponseJSON:(NSString *)JSONBody;
 
 + (void)setSupportedMethods:(NSArray*)methods;
 + (void)setSupportedSchemes:(NSArray*)schemes;
